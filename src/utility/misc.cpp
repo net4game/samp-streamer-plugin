@@ -208,79 +208,13 @@ std::unordered_map<int, Item::SharedTextLabel>::iterator Utility::destroyTextLab
 
 std::size_t Utility::getChunkTickRate(int type, int playerid)
 {
-	if (playerid >= 0 && playerid < MAX_PLAYERS)
-	{
-		std::unordered_map<int, Player>::iterator p = core->getData()->players.find(playerid);
-		if (p != core->getData()->players.end())
-		{
-			switch (type)
-			{
-				case STREAMER_TYPE_OBJECT:
-				{
-					return p->second.chunkTickRate[STREAMER_TYPE_OBJECT];
-				}
-				case STREAMER_TYPE_MAP_ICON:
-				{
-					return p->second.chunkTickRate[STREAMER_TYPE_MAP_ICON];
-				}
-				case STREAMER_TYPE_3D_TEXT_LABEL:
-				{
-					return p->second.chunkTickRate[STREAMER_TYPE_3D_TEXT_LABEL];
-				}
-			}
-		}
-	}
+	(void)playerid;
 	return core->getData()->getGlobalChunkTickRate(type);
 }
 
 bool Utility::setChunkTickRate(int type, std::size_t value, int playerid)
 {
-	if (playerid >= 0 && playerid < MAX_PLAYERS)
-	{
-		std::unordered_map<int, Player>::iterator p = core->getData()->players.find(playerid);
-		if (p != core->getData()->players.end())
-		{
-			switch (type)
-			{
-				case STREAMER_TYPE_OBJECT:
-				{
-					p->second.chunkTickRate[STREAMER_TYPE_OBJECT] = value;
-					return true;
-				}
-				case STREAMER_TYPE_MAP_ICON:
-				{
-					p->second.chunkTickRate[STREAMER_TYPE_MAP_ICON] = value;
-					return true;
-				}
-				case STREAMER_TYPE_3D_TEXT_LABEL:
-				{
-					p->second.chunkTickRate[STREAMER_TYPE_3D_TEXT_LABEL] = value;
-					return true;
-				}
-			}
-		}
-	}
-	for (std::unordered_map<int, Player>::iterator p = core->getData()->players.begin(); p != core->getData()->players.end(); ++p)
-	{
-		switch (type)
-		{
-			case STREAMER_TYPE_OBJECT:
-			{
-				p->second.chunkTickRate[STREAMER_TYPE_OBJECT] = value;
-				break;
-			}
-			case STREAMER_TYPE_MAP_ICON:
-			{
-				p->second.chunkTickRate[STREAMER_TYPE_MAP_ICON] = value;
-				break;
-			}
-			case STREAMER_TYPE_3D_TEXT_LABEL:
-			{
-				p->second.chunkTickRate[STREAMER_TYPE_3D_TEXT_LABEL] = value;
-				break;
-			}
-		}
-	}
+	(void)playerid;
 	return core->getData()->setGlobalChunkTickRate(type, value);
 }
 

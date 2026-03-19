@@ -158,7 +158,7 @@ void ChunkStreamer::discoverMapIcons(Player &player, const std::vector<SharedCel
 
 void ChunkStreamer::streamMapIcons(Player &player, bool automatic)
 {
-	if (!automatic || ++player.chunkTickCount[STREAMER_TYPE_MAP_ICON] >= player.chunkTickRate[STREAMER_TYPE_MAP_ICON])
+	if (!automatic || ++player.chunkTickCount[STREAMER_TYPE_MAP_ICON] >= core->getData()->getGlobalChunkTickRate(STREAMER_TYPE_MAP_ICON))
 	{
 		std::size_t chunkCount = 0;
 		if (!player.removedMapIcons.empty())
@@ -316,7 +316,7 @@ void ChunkStreamer::discoverObjects(Player &player, const std::vector<SharedCell
 
 void ChunkStreamer::streamObjects(Player &player, bool automatic)
 {
-	if (!automatic || ++player.chunkTickCount[STREAMER_TYPE_OBJECT] >= player.chunkTickRate[STREAMER_TYPE_OBJECT])
+	if (!automatic || ++player.chunkTickCount[STREAMER_TYPE_OBJECT] >= core->getData()->getGlobalChunkTickRate(STREAMER_TYPE_OBJECT))
 	{
 		std::size_t chunkCount = 0;
 		if (!player.removedObjects.empty())
@@ -538,7 +538,7 @@ void ChunkStreamer::discoverTextLabels(Player &player, const std::vector<SharedC
 
 void ChunkStreamer::streamTextLabels(Player &player, bool automatic)
 {
-	if (!automatic || ++player.chunkTickCount[STREAMER_TYPE_3D_TEXT_LABEL] >= player.chunkTickRate[STREAMER_TYPE_3D_TEXT_LABEL])
+	if (!automatic || ++player.chunkTickCount[STREAMER_TYPE_3D_TEXT_LABEL] >= core->getData()->getGlobalChunkTickRate(STREAMER_TYPE_3D_TEXT_LABEL))
 	{
 		std::size_t chunkCount = 0;
 		if (!player.removedTextLabels.empty())

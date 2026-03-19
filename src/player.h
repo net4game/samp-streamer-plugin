@@ -27,7 +27,6 @@ struct Player
 	int activeCheckpoint;
 	int activeRaceCheckpoint;
 	std::size_t chunkTickCount[STREAMER_MAX_TYPES];
-	std::size_t chunkTickRate[STREAMER_MAX_TYPES];
 	std::size_t currentVisibleObjects;
 	std::size_t currentVisibleTextLabels;
 	int delayedCheckpoint;
@@ -45,8 +44,6 @@ struct Player
 	float radiusMultipliers[STREAMER_MAX_TYPES];
 	int references;
 	bool requestingClass;
-	std::size_t tickCount;
-	std::size_t tickRate;
 	bool updateUsingCameraPosition;
 	bool updateWhenIdle;
 	SharedCell visibleCell;

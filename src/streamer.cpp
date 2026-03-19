@@ -54,43 +54,33 @@ void Streamer::startAutomaticUpdate()
 	if (!core->getData()->interfaces.empty())
 	{
 		std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
-		if (!core->getData()->players.empty())
+		if (++tickCount >= tickRate)
 		{
-			bool updatedActiveItems = false;
-			for (std::unordered_map<int, Player>::iterator p = core->getData()->players.begin(); p != core->getData()->players.end(); ++p)
+			processActiveItems();
+			if (!core->getData()->players.empty())
 			{
-				if (core->getChunkStreamer()->getChunkStreamingEnabled() && p->second.processingChunks.any())
+				for (std::unordered_map<int, Player>::iterator p = core->getData()->players.begin(); p != core->getData()->players.end(); ++p)
 				{
-					core->getChunkStreamer()->performPlayerChunkUpdate(p->second, true);
-				}
-				else
-				{
-					if (++p->second.tickCount >= p->second.tickRate)
+					if (!p->second.delayedUpdate)
 					{
-						if (!updatedActiveItems)
+						performPlayerUpdate(p->second, true);
+					}
+					else
+					{
+						startManualUpdate(p->second, p->second.delayedUpdateType);
+					}
+				}
+				if (core->getChunkStreamer()->getChunkStreamingEnabled())
+				{
+					for (std::unordered_map<int, Player>::iterator p = core->getData()->players.begin(); p != core->getData()->players.end(); ++p)
+					{
+						if (p->second.processingChunks.any())
 						{
-							processActiveItems();
-							updatedActiveItems = true;
+							core->getChunkStreamer()->performPlayerChunkUpdate(p->second, true);
 						}
-						if (!p->second.delayedUpdate)
-						{
-							performPlayerUpdate(p->second, true);
-						}
-						else
-						{
-							startManualUpdate(p->second, p->second.delayedUpdateType);
-						}
-						p->second.tickCount = 0;
 					}
 				}
 			}
-		}
-		else
-		{
-			processActiveItems();
-		}
-		if (++tickCount >= tickRate)
-		{
 			for (std::unordered_map<int, Player>::iterator p = core->getData()->players.begin(); p != core->getData()->players.end(); ++p)
 			{
 				std::vector<SharedCell> cells;

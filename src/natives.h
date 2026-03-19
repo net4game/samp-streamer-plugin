@@ -31,8 +31,6 @@ namespace Natives
 	// Settings
 	cell AMX_NATIVE_CALL Streamer_GetTickRate(AMX *amx, cell *params);
 	cell AMX_NATIVE_CALL Streamer_SetTickRate(AMX *amx, cell *params);
-	cell AMX_NATIVE_CALL Streamer_GetPlayerTickRate(AMX *amx, cell *params);
-	cell AMX_NATIVE_CALL Streamer_SetPlayerTickRate(AMX *amx, cell *params);
 	cell AMX_NATIVE_CALL Streamer_ToggleChunkStream(AMX *amx, cell *params);
 	cell AMX_NATIVE_CALL Streamer_IsToggleChunkStream(AMX *amx, cell *params);
 	cell AMX_NATIVE_CALL Streamer_GetChunkTickRate(AMX *amx, cell *params);

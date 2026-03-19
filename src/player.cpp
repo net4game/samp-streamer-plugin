@@ -26,9 +26,6 @@ Player::Player(int id)
 	chunkTickCount[STREAMER_TYPE_OBJECT] = 0;
 	chunkTickCount[STREAMER_TYPE_MAP_ICON] = 0;
 	chunkTickCount[STREAMER_TYPE_3D_TEXT_LABEL] = 0;
-	chunkTickRate[STREAMER_TYPE_OBJECT] = 1;
-	chunkTickRate[STREAMER_TYPE_MAP_ICON] = 1;
-	chunkTickRate[STREAMER_TYPE_3D_TEXT_LABEL] = 1;
 	currentVisibleObjects = core->getData()->getGlobalMaxVisibleItems(STREAMER_TYPE_OBJECT);
 	currentVisibleTextLabels = core->getData()->getGlobalMaxVisibleItems(STREAMER_TYPE_3D_TEXT_LABEL);
 	delayedCheckpoint = 0;
@@ -54,8 +51,6 @@ Player::Player(int id)
 	radiusMultipliers[STREAMER_TYPE_AREA] = core->getData()->getGlobalRadiusMultiplier(STREAMER_TYPE_AREA);
 	radiusMultipliers[STREAMER_TYPE_ACTOR] = core->getData()->getGlobalRadiusMultiplier(STREAMER_TYPE_ACTOR);
 	requestingClass = false;
-	tickCount = 0;
-	tickRate = 50;
 	updateUsingCameraPosition = false;
 	updateWhenIdle = false;
 	visibleCell = std::make_shared<Cell>();
